@@ -1,0 +1,29 @@
+version: '3'
+services:
+  app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+    depends_on:
+      - dynamodb
+    networks:
+      - todo-network
+
+  dynamodb:
+    image: amazon/dynamodb-local
+    ports:
+      - "8000:8000"
+    volumes:
+      - dynamodb_data:/home/dynamodblocal
+    networks:
+      - todo-network
+
+networks:
+  todo-network:
+
+volumes:
+  dynamodb_data:

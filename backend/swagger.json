@@ -1,0 +1,133 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API de Gerenciamento de Tarefas",
+      "description": "API para gerenciar tarefas em uma lista (To-Do List)",
+      "version": "1.0.0"
+    },
+    "paths": {
+      "/tasks": {
+        "get": {
+          "summary": "Retorna todas as tarefas",
+          "responses": {
+            "200": {
+              "description": "Lista de tarefas"
+            }
+          }
+        },
+        "post": {
+          "summary": "Cria uma nova tarefa",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "descricao": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "descricao": "Tarefa exemplo"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Tarefa criada com sucesso"
+            }
+          }
+        }
+      },
+      "/tasks/{id}": {
+        "get": {
+          "summary": "Retorna uma tarefa específica pelo ID",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "ID da tarefa",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Tarefa encontrada"
+            },
+            "404": {
+              "description": "Tarefa não encontrada"
+            }
+          }
+        },
+        "put": {
+          "summary": "Atualiza uma tarefa existente pelo ID",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "ID da tarefa",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "descricao": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "descricao": "Tarefa atualizada"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Tarefa atualizada com sucesso"
+            },
+            "404": {
+              "description": "Tarefa não encontrada"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Deleta uma tarefa existente pelo ID",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "ID da tarefa",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Tarefa deletada com sucesso"
+            },
+            "404": {
+              "description": "Tarefa não encontrada"
+            }
+          }
+        }
+      }
+    }
+  }
+  
